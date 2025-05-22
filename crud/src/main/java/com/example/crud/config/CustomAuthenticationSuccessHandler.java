@@ -18,19 +18,25 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         this.userRepository = userRepository;
     }
 
-    @Override
+   @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
         String username = ((UserDetails) authentication.getPrincipal()).getUsername();
 
-        // Ambil user dari database
         User user = userRepository.findByUsername(username).orElse(null);
-
-        if (user != null && "ADMIN".equalsIgnoreCase(user.getRole())) {
-            response.sendRedirect("/admin/dashboard");
-        } else {
-            response.sendRedirect("/mahasiswa");
+        System.out.println(user.getRole());
+        
+        if (user != null && user.getRole() != null) {
+            String role = user.getRole().toUpperCase();
+            if (role.equals("ADMIN") || role.equals("ROLE_ADMIN")) {
+                response.sendRedirect("/admin_mahasiswa");
+                return;
+            }
         }
+
+
+        response.sendRedirect("/mahasiswa");
     }
+
 }

@@ -35,6 +35,18 @@ public class MahasiswaController {
         return "index"; // Akan mencari file src/main/resources/templates/index.html
     }
 
+    @GetMapping("/admin_mahasiswa")
+    @PreAuthorize("isAuthenticated()")
+    public String indexAdmin(Model model) {
+        model.addAttribute("daftarMahasiswa", repo.findAll());
+
+        // Tambahkan informasi user yang sedang login
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", auth.getName());
+
+        return "admin/dashboard"; // Akan mencari file src/main/resources/templates/index.html
+    }
+
     // Tampilkan form tambah mahasiswa
     @GetMapping("/tambah")
     @PreAuthorize("isAuthenticated()")
@@ -89,14 +101,42 @@ public class MahasiswaController {
     }
 
     // Tampilkan halaman login
-    @GetMapping("/login")
-    public String login() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && auth.isAuthenticated() && !auth.getName().equals("anonymousUser")) {
-            return "redirect:/mahasiswa";
-        }
-        return "login"; // Akan mencari file src/main/resources/templates/login.html
-    }
+   @GetMapping("/login")
+public String login() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    
+    // if (auth != null && auth.isAuthenticated() && !auth.getName().equals("anonymousUser")) {
+    //     // Cek apakah user memiliki role ADMIN
+    //     boolean isAdmin = auth.getAuthorities().stream()
+    //             .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
 
-    // Logout otomatis ditangani oleh Spring Security
+    //     if (isAdmin) {
+    //         return "redirect:/admin/dashboard";
+    //     } else {
+    //         return "redirect:/admin/dashboard";
+    //     }
+    // }
+
+    return "login"; // Akan merender templates/login.html
+}
+
+// @PostMapping("/store_login")
+// public String loginPost() {
+//     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+//     if (auth != null && auth.isAuthenticated() && !auth.getName().equals("anonymousUser")) {
+//         boolean isAdmin = auth.getAuthorities().stream()
+//                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+//         if (isAdmin) {
+//             return "redirect:/admin/dashboard";
+//         } else {
+//             return "redirect:/mahasiswa/dashboard";
+//         }
+//     }
+
+//     // Jika belum login atau gagal
+//     return "redirect:/login?error";
+// }
+
 }

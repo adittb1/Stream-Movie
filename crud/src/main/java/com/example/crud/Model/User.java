@@ -34,7 +34,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
+        return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -46,6 +46,8 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
+
 
     @Override
     public boolean isAccountNonExpired() {
