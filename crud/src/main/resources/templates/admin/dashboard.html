@@ -1,44 +1,102 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - POP STAR CINEMA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background-color: #f4f4f4;
+        .sidebar {
+            min-height: 100vh;
         }
-        .container {
-            background-color: white;
-            padding: 20px 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #aaa;
+        .active-link {
+            background-color: #2563eb;
+            color: white;
         }
-        h1 {
-            color: #2c3e50;
-        }
-        a {
-            text-decoration: none;
-            color: #2980b9;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .nav {
-            margin-top: 20px;
+        .badge {
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            margin-left: 0.25rem;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Halaman Admin</h1>
-        <p th:text="${pesan}">Selamat datang, Admin!</p>
+<body class="flex bg-gray-100 font-sans">
 
-        <div class="nav">
-            <p><a href="/mahasiswa">Lihat Data Mahasiswa</a></p>
-            <p><a href="/logout">Logout</a></p>
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 bg-gray-800 text-gray-200 flex flex-col">
+        <div class="p-4 text-lg font-bold flex items-center gap-2">
+            <i class="fas fa-book text-white"></i> <span>Cinema<span class="text-blue-400">Web</span></span>
         </div>
-    </div>
+        <input type="text" placeholder="search" class="mx-4 my-2 px-2 py-1 rounded bg-gray-700 text-white placeholder-gray-400">
+        <nav class="flex-1 px-4 space-y-2">
+            <a href="#" class="flex items-center p-2 rounded hover:bg-gray-700 active-link">
+                <i class="fas fa-tachometer-alt w-5"></i>
+                <span class="ml-2">Dashboard</span>
+            </a>
+            <div class="mt-4 text-sm text-gray-400">Customer Setting</div>
+            <a href="#" class="flex items-center p-2 rounded hover:bg-gray-700">
+                <i class="fas fa-user w-5"></i>
+                <span class="ml-2">Customer</span>
+            </a>
+            <a href="#" class="flex items-center p-2 rounded hover:bg-gray-700">
+                <i class="fas fa-share w-5"></i>
+                <span class="ml-2">Cinema</span>
+            </a>
+            <div class="mt-4 text-sm text-gray-400">Order Setting</div>
+            <a href="#" class="flex items-center p-2 rounded hover:bg-gray-700">
+                <i class="fas fa-shopping-cart w-5"></i>
+                <span class="ml-2">Orders</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1">
+        <!-- Topbar -->
+        <header class="bg-white shadow px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-search text-gray-500 cursor-pointer"></i>
+                <i class="fas fa-expand text-gray-500 cursor-pointer"></i>
+                <span class="text-gray-700 font-medium">AkunAdmin</span>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <section class="p-6">
+            <h2 class="text-lg text-gray-600 mb-4">Dashboard</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Book -->
+                <div class="bg-blue-600 text-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        Cinema <span class="badge">0</span>
+                    </h3>
+                    <a href="#" class="mt-4 inline-block text-sm hover:underline">View Details <i class="fas fa-chevron-right ml-1"></i></a>
+                </div>
+
+                <!-- Customer -->
+                <div class="bg-yellow-400 text-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        Customer <span class="badge">1</span>
+                    </h3>
+                    <a href="#" class="mt-4 inline-block text-sm hover:underline">View Details <i class="fas fa-chevron-right ml-1"></i></a>
+                </div>
+
+                <!-- Orders -->
+                <div class="bg-green-600 text-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold flex items-center">
+                        Order <span class="badge">1</span>
+                    </h3>
+                    <a href="#" class="mt-4 inline-block text-sm hover:underline">View Details <i class="fas fa-chevron-right ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
 </body>
 </html>

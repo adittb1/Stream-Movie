@@ -102,7 +102,7 @@ public class MahasiswaController {
 
     // Tampilkan halaman login
    @GetMapping("/login")
-public String login() {
+    public String login() {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     
     // if (auth != null && auth.isAuthenticated() && !auth.getName().equals("anonymousUser")) {
