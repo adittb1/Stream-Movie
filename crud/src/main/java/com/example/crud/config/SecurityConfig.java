@@ -21,48 +21,43 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationSuccessHandler successHandler) throws Exception {
         http
-            .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/login", "/register", "/h2-console/**", "/css/**", "/js/**", "/images/**").permitAll()
+            .authorizeHttpRequests(requests -> requests
+                .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/images/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
-            .formLogin((form) -> form
+            .formLogin(form -> form
                 .loginPage("/login")
-                .successHandler(successHandler) // custom redirect by role
+                .successHandler(successHandler)
                 .permitAll()
             )
-            .logout((logout) -> logout
+            .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/")   // redirect ke index setelah logout
                 .permitAll()
             )
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**")) // allow H2 console
-            .headers(headers -> headers.frameOptions().sameOrigin());     // allow H2 in iframe
+            .csrf().disable(); // untuk kemudahan demo, nonaktifkan CSRF (jika ingin aman, sesuaikan form logout dengan POST dan csrf token)
 
         return http.build();
     }
 
-    // Load user dari database menggunakan UserRepository
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return username -> userRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
 
-    // BCrypt encoder untuk password
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Untuk autentikasi manual (jika diperlukan)
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 
-    // Handler kustom redirect berdasarkan role
     @Bean
     public AuthenticationSuccessHandler successHandler(UserRepository userRepository) {
         return new CustomAuthenticationSuccessHandler(userRepository);

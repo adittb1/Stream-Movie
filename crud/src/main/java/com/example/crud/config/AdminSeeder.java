@@ -16,10 +16,9 @@ public class AdminSeeder {
             if (!userRepository.existsByUsername("admin")) {
                 User admin = new User();
                 admin.setUsername("admin");
-                admin.setPassword(passwordEncoder.encode("admin123"));
+                admin.setPassword(passwordEncoder.encode("1234"));
                 admin.setRole("ADMIN");
                 userRepository.save(admin);
-                System.out.println("✅ Admin account created: admin / admin123");
             }
         };
     }
