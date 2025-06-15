@@ -87,6 +87,25 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .btn-back-custom {
+            background: linear-gradient(to right, #ffb800, #ff5f00);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            transition: filter 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-back-custom:hover {
+            filter: brightness(1.1);
+            color: #000;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -95,20 +114,36 @@
     <h3 class="text-center">🌟 Login ke POP STAR CINEMA</h3>
 
     <form th:action="@{/login}" method="post">
-        <div th:if="${param.error}" class="alert alert-danger mb-3">Username atau password salah</div>
+        <!-- ALERT ERROR -->
+        <div th:if="${param.error}">
+            <div class="alert alert-danger mb-3"
+                 th:text="${param.message != null ? param.message : 'Username atau password salah'}">
+                <!-- Pesan akan ditampilkan di sini -->
+            </div>
+        </div>
 
+        <!-- USERNAME -->
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
+            <input type="text" class="form-control" id="username" name="username"
+                   placeholder="Masukkan username" required>
         </div>
 
+        <!-- PASSWORD -->
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
+            <input type="password" class="form-control" id="password" name="password"
+                   placeholder="Masukkan password" required>
         </div>
 
+        <!-- SUBMIT -->
         <div class="d-grid mt-4">
             <button type="submit" class="btn btn-custom">Login</button>
+        </div>
+
+        <!-- KEMBALI -->
+        <div class="d-grid mt-2">
+            <a th:href="@{/}" class="btn-back-custom">⬅ Kembali ke Beranda</a>
         </div>
     </form>
 

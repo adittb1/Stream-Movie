@@ -57,7 +57,7 @@
             color: #fff;
         }
 
-        .btn-custom {
+        .btn-custom, .btn-back-custom {
             background: linear-gradient(to right, #ffb800, #ff5f00);
             color: #000;
             font-weight: bold;
@@ -65,10 +65,16 @@
             border-radius: 12px;
             padding: 12px;
             transition: filter 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .btn-custom:hover {
+        .btn-custom:hover,
+        .btn-back-custom:hover {
             filter: brightness(1.1);
+            color: #000;
+            text-decoration: none;
         }
 
         .alert {
@@ -95,20 +101,53 @@
     <h3 class="text-center">📝 Daftar ke POP STAR CINEMA</h3>
 
     <form th:action="@{/register}" method="post">
+        <!-- Alert jika terjadi error umum -->
         <div th:if="${param.error}" class="alert alert-danger mb-3">Registrasi gagal, silakan coba lagi</div>
 
+        <!-- Alert jika paket habis -->
+        <div th:if="${param.paketHabis}" class="alert alert-danger mb-3">Paket yang Anda pilih sudah habis, silakan pilih paket lain</div>
+
+        <!-- Nama Lengkap -->
         <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
+            <label for="username" class="form-label">Nama</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan nama" required
+                   pattern="[A-Z][a-z]*(\s[a-z]+)*" title="Huruf pertama harus kapital">
         </div>
 
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" required
+                   pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" title="Masukkan email yang valid (contoh: email@domain.com)">
+        </div>
+
+        <!-- Password -->
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required
+                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                   title="Minimal 8 karakter dengan kombinasi huruf dan angka">
+        </div>
+
+        <!-- Pilih Paket -->
+        <div class="mb-3">
+            <label for="paketId" class="form-label">Pilih Paket</label>
+            <select class="form-control" id="paketId" name="paketId" required>
+                <option value="" disabled selected>-- Pilih Paket --</option>
+                <option th:each="paket : ${pakets}"
+                        th:value="${paket.id}"
+                        th:text="${paket.namaPaket + ' (Sisa: ' + paket.kuota + ') - Rp. ' + paket.harga}">
+                </option>
+            </select>
         </div>
 
         <div class="d-grid mt-4">
-            <button type="submit" class="btn btn-custom">Daftar</button>
+            <button type="submit" class="btn-custom">Daftar</button>
+        </div>
+
+        <!-- Tombol kembali -->
+        <div class="d-grid mt-2">
+            <a th:href="@{ / }" class="btn-back-custom">⬅ Kembali ke Beranda</a>
         </div>
     </form>
 

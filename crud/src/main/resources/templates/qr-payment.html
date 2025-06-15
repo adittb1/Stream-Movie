@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pembayaran - POP STAR CINEMA</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #141425;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 8px 0;
+            color: #ccc;
+        }
+
+        .btn {
+            margin: 25px 0;
+            padding: 12px 28px;
+            background-color: #ffc107;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #ffb300;
+            text-decoration: none;
+        }
+
+        canvas {
+            margin: 30px auto;
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background-color: #000;
+            color: #bbb;
+            font-size: 0.9rem;
+            padding: 15px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <h2>Konfirmasi Pembayaran</h2>
+    <p>Silakan scan kode QR di bawah untuk menyelesaikan pembayaran Anda.</p>
+
+    <!-- QR Code -->
+    <canvas id="qr-code"></canvas>
+
+    <!-- Tombol Konfirmasi -->
+    <a th:href="@{'/confirm?accept=yes'}" class="btn">Saya Sudah Bayar</a>
+
+    <!-- Info Tambahan -->
+    <div class="contact-info">
+        <p>Jika pesanan belum diaktifkan dalam 1 hari, silakan hubungi admin:</p>
+        <p><strong>0858-3264-7954</strong> (Just AdittB)</p>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        © 2025 POP STAR CINEMA. All Rights Reserved.
+    </div>
+</footer>
+
+<script>
+    const qr = new QRious({
+        element: document.getElementById('qr-code'),
+        size: 250,
+        value: 'Pembayaran POP STAR CINEMA - 085832647954 - ShopeePay'
+    });
+</script>
+
+</body>
+</html>

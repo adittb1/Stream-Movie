@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Manage Films - POP STAR CINEMA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" />
+    <style>
+        .sidebar {
+            min-height: 100vh;
+        }
+        .active-link {
+            background-color: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+<body class="flex bg-gray-100 font-sans">
+
+<!-- Sidebar -->
+<aside class="sidebar w-64 bg-gray-800 text-gray-200 flex flex-col">
+    <div class="p-4 text-lg font-bold flex items-center gap-2">
+        <i class="fas fa-film text-white"></i>
+        <span>Cinema<span class="text-blue-400">Web</span></span>
+    </div>
+    <input
+        type="text"
+        placeholder="Search"
+        class="mx-4 my-2 px-2 py-1 rounded bg-gray-700 text-white placeholder-gray-400"
+    />
+    <nav class="flex-1 px-4 space-y-2">
+        <a href="/admin/dashboard" class="flex items-center p-2 rounded hover:bg-gray-700">
+            <i class="fas fa-tachometer-alt w-5"></i>
+            <span class="ml-2">Dashboard</span>
+        </a>
+        <div class="mt-4 text-sm text-gray-400">Customer Setting</div>
+        <a href="/admin/user" class="flex items-center p-2 rounded hover:bg-gray-700">
+            <i class="fas fa-user w-5"></i>
+            <span class="ml-2">Customer</span>
+        </a>
+        <div class="mt-4 text-sm text-gray-400">Cinema Setting</div>
+        <a href="/admin/cinema" class="flex items-center p-2 rounded hover:bg-gray-700 active-link">
+            <i class="fas fa-video w-5"></i>
+            <span class="ml-2">Cinema</span>
+        </a>
+        <div class="mt-4 text-sm text-gray-400">Paket Setting</div>
+        <a href="/admin/paket" class="flex items-center p-2 rounded hover:bg-gray-700">
+            <i class="fas fa-box w-5"></i>
+            <span class="ml-2">Paket</span>
+        </a>
+    </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="flex-1 p-6">
+    <!-- Topbar -->
+    <header class="bg-white shadow px-6 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-semibold">Manage Cinema</h1>
+        <div class="flex items-center space-x-4">
+            <a href="/admin/cinema/create"
+               class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center gap-2">
+                <i class="fas fa-plus"></i> Add Film
+            </a>
+        </div>
+    </header>
+
+    <!-- Film Table -->
+    <section class="mt-6 bg-white rounded shadow p-6 overflow-x-auto">
+        <table class="min-w-full table-auto border-collapse border border-gray-200">
+            <thead>
+                <tr class="bg-gray-100">
+                    <th class="border border-gray-300 px-4 py-2 text-left">ID</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Title</th>            
+                    <th class="border border-gray-300 px-4 py-2 text-left">URL</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Thumbnail</th>
+                    <th class="border border-gray-300 px-4 py-2 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="film : ${films}" class="hover:bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2" th:text="${film.id}">1</td>
+                    <td class="border border-gray-300 px-4 py-2" th:text="${film.title}">Title</td>
+                    <td class="border border-gray-300 px-4 py-2 text-blue-600 underline text-sm">
+                        <a th:href="${film.url}" target="_blank" th:text="${film.url}">Link</a>
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <img th:src="@{${film.thumbnailUrl}}" alt="Thumbnail" class="w-20 h-12 object-cover rounded" />
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2 text-center space-x-2">
+                        <a th:href="@{'/admin/cinema/edit/' + ${film.id}}" class="text-yellow-600 hover:text-yellow-800" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form th:action="@{'/admin/cinema/delete/' + ${film.id}}" method="post"
+                              onsubmit="return confirm('Are you sure to delete this film?');"
+                              class="inline">
+                            <button type="submit" class="text-red-600 hover:text-red-800" title="Delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(films)}">
+                    <td colspan="7" class="text-center py-4 text-gray-500">No films found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+</body>
+</html>
