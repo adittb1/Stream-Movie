@@ -15,15 +15,40 @@
       min-height: 100vh;
     }
 
+<<<<<<< HEAD
     .navbar {
       background-color: #141425;
       box-shadow: 0 4px 8px rgba(0,0,0,0.6);
     }
 
+=======
+    /* Navbar persis sama ukuran dengan contoh */
+    .navbar {
+      background-color: #141425;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+      height: 70px; /* tetap fixed 70px */
+      padding: 0; /* hilangkan padding default */
+      display: flex;
+      align-items: center; /* vertical center semua isi navbar */
+      z-index: 1000;
+    }
+
+    /* Container di navbar disamakan padding horizontal */
+    .navbar .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px; /* supaya container juga pas tinggi navbar */
+    }
+
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     .navbar-brand {
       font-weight: 700;
       color: #ffc107 !important;
       font-size: 1.5rem;
+<<<<<<< HEAD
     }
 
     .nav-link {
@@ -35,24 +60,41 @@
     .nav-link:hover {
       color: #ffb800 !important;
       text-decoration: underline;
+=======
+      line-height: 70px; /* vertikal align */
+      margin: 0;
+      user-select: none;
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     }
 
     .ms-auto {
       display: flex;
       align-items: center;
       gap: 15px;
+<<<<<<< HEAD
+=======
+      height: 70px; /* vertikal align */
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     }
 
     .ms-auto span {
       font-weight: 600;
       color: #eee;
       white-space: nowrap;
+<<<<<<< HEAD
     }
+=======
+      line-height: 70px;
+      user-select: none;
+    }
+
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     .ms-auto span span {
       color: #ffc107;
       font-weight: 700;
     }
 
+<<<<<<< HEAD
     .btn-gold {
       background: linear-gradient(to right, #ffb800, #ff5f00);
       color: #000;
@@ -62,6 +104,24 @@
       border: none;
       margin: 5px;
       transition: filter 0.3s ease;
+=======
+    /* Tombol Logout yang sama ukuran dan tinggi */
+    .btn-gold {
+      background: linear-gradient(to right, #ffb800, #ff5f00);
+      color: #000;
+      font-weight: 700;
+      padding: 8px 24px; /* dikurangi sedikit padding vertikal supaya pas 40px */
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+      font-size: 1rem;
+      height: 40px; /* tinggi pasti */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     }
 
     .btn-gold:hover {
@@ -69,6 +129,10 @@
       color: #000;
     }
 
+<<<<<<< HEAD
+=======
+    /* Hero Section */
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     .hero {
       height: 100vh;
       display: flex;
@@ -99,6 +163,10 @@
       margin: 5px;
     }
 
+<<<<<<< HEAD
+=======
+    /* NOW SHOWING Styling */
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     .now-showing-section {
       background-color: #141425;
       color: #ffc107;
@@ -124,10 +192,18 @@
       box-shadow: 0 6px 14px rgba(255, 193, 7, 0.9);
     }
     .movie-poster {
+<<<<<<< HEAD
       height: 360px;
       object-fit: cover;
       border-radius: 12px 12px 0 0;
       border-bottom: 2px solid #ffb800;
+=======
+      height: 400px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+      user-select: none;
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     }
     .card-title {
       font-weight: 700;
@@ -141,6 +217,7 @@
       color: inherit;
       display: block;
       user-select: none;
+<<<<<<< HEAD
     }
 
     /* Pagination style */
@@ -173,16 +250,23 @@
     .pagination .page-link:hover {
       background-color: #ffc107;
       color: #000;
+=======
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
     }
   </style>
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">POP STAR CINEMA</a>
+<<<<<<< HEAD
       <div class="ms-auto d-flex align-items-center">
         <span class="me-3 fw-semibold">
+=======
+      <div class="ms-auto">
+        <span>
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
           Selamat datang, <span th:text="${username}">User</span>
         </span>
         <form th:action="@{/logout}" method="post" style="display:inline;">
@@ -198,6 +282,58 @@
     <p>
       POP STAR CINEMA adalah aplikasi streaming film yang memudahkan Anda untuk menonton berbagai film dan tayangan favorit secara online, mengeksplorasi katalog judul terbaru dan terpopuler, serta menikmati berbagai promo menarik seperti Buy 1 Get 1, sehingga Anda bisa merasakan pengalaman menonton yang praktis, seru, dan hemat langsung dari rumah hanya dalam satu klik.
     </p>
+<<<<<<< HEAD
+=======
+  </section>
+
+  <!-- Now Showing Section -->
+  <section class="now-showing-section">
+    <h2>NOW SHOWING IN CINEMAS</h2>
+    <div class="container">
+      <div class="row justify-content-center g-4">
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="/film-detail?judul=Mission%20Impossible" class="card-link">
+            <div class="card movie-card shadow-sm">
+              <img src="https://upload.wikimedia.org/wikipedia/en/6/63/Mission_Impossible_Dead_Reckoning_Part_One_poster.jpg" class="card-img-top movie-poster" alt="Mission Impossible" />
+              <div class="card-body text-center">
+                <h6 class="card-title">Mission: Impossible</h6>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="/film-detail?judul=Gundik" class="card-link">
+            <div class="card movie-card shadow-sm">
+              <img src="https://upload.wikimedia.org/wikipedia/id/thumb/6/6f/Gundik_poster.jpg/220px-Gundik_poster.jpg" class="card-img-top movie-poster" alt="Gundik" />
+              <div class="card-body text-center">
+                <h6 class="card-title">Gundik</h6>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="/film-detail?judul=Final%20Destination" class="card-link">
+            <div class="card movie-card shadow-sm">
+              <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Final_Destination_5_poster.jpg" class="card-img-top movie-poster" alt="Final Destination" />
+              <div class="card-body text-center">
+                <h6 class="card-title">Final Destination</h6>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3">
+          <a href="/film-detail?judul=Lilo%20and%20Stitch" class="card-link">
+            <div class="card movie-card shadow-sm">
+              <img src="https://upload.wikimedia.org/wikipedia/en/e/e3/Lilo_%26_Stitch_poster.jpg" class="card-img-top movie-poster" alt="Lilo and Stitch" />
+              <div class="card-body text-center">
+                <h6 class="card-title">Lilo & Stitch</h6>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+>>>>>>> 59c23aa7a252e3488f59677f409bc9ba5c6e4ad8
   </section>
 
   <!-- Now Showing -->
